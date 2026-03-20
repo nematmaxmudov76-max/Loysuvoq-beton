@@ -1,0 +1,13 @@
+[project]
+name = "loysuvoq-beton"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=6.0.3",
+    "django-ckeditor>=6.7.3",
+    "django-jazzmin>=3.0.4",
+    "psycopg2-binary>=2.9.11",
+    "python-dotenv>=1.2.2",
+]
