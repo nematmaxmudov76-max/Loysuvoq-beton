@@ -6,61 +6,162 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('common', '0001_initial'),
+        ("common", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PostCategory',
+            name="PostCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Yaratilgan vaqti')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name="O'zgartirilgan vaqti")),
-                ('name', models.CharField(max_length=255, verbose_name='Name')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Yaratilgan vaqti"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="O'zgartirilgan vaqti"
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="Name")),
             ],
             options={
-                'verbose_name': 'Post Category',
-                'verbose_name_plural': 'Post Categories',
+                "verbose_name": "Post Category",
+                "verbose_name_plural": "Post Categories",
             },
         ),
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Yaratilgan vaqti')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name="O'zgartirilgan vaqti")),
-                ('title', models.CharField(max_length=255, verbose_name='Title')),
-                ('slug', models.SlugField(blank=True, max_length=255, null=True, verbose_name='Slug')),
-                ('subtitle', models.CharField(blank=True, max_length=255, null=True, verbose_name='Subtitle')),
-                ('author', models.CharField(max_length=255, verbose_name='Author')),
-                ('content', ckeditor.fields.RichTextField(verbose_name='Content')),
-                ('views_count', models.IntegerField(default=0, verbose_name='Views count')),
-                ('comments_count', models.IntegerField(default=0, verbose_name='Comments count')),
-                ('image', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, to='common.media', verbose_name='Image')),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to='blog.postcategory', verbose_name='Category')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Yaratilgan vaqti"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="O'zgartirilgan vaqti"
+                    ),
+                ),
+                ("title", models.CharField(max_length=255, verbose_name="Title")),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, max_length=255, null=True, verbose_name="Slug"
+                    ),
+                ),
+                (
+                    "subtitle",
+                    models.CharField(
+                        blank=True, max_length=255, null=True, verbose_name="Subtitle"
+                    ),
+                ),
+                ("author", models.CharField(max_length=255, verbose_name="Author")),
+                ("content", ckeditor.fields.RichTextField(verbose_name="Content")),
+                (
+                    "views_count",
+                    models.IntegerField(default=0, verbose_name="Views count"),
+                ),
+                (
+                    "comments_count",
+                    models.IntegerField(default=0, verbose_name="Comments count"),
+                ),
+                (
+                    "image",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        to="common.media",
+                        verbose_name="Image",
+                    ),
+                ),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        to="blog.postcategory",
+                        verbose_name="Category",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Post',
-                'verbose_name_plural': 'Posts',
+                "verbose_name": "Post",
+                "verbose_name_plural": "Posts",
             },
         ),
         migrations.CreateModel(
-            name='PostComment',
+            name="PostComment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Yaratilgan vaqti')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name="O'zgartirilgan vaqti")),
-                ('text', models.TextField(max_length=255, verbose_name='Test')),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, to='blog.post', verbose_name='Post')),
-                ('reply_to', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, to='blog.postcomment', verbose_name='Reply to')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Yaratilgan vaqti"
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True, verbose_name="O'zgartirilgan vaqti"
+                    ),
+                ),
+                ("text", models.TextField(max_length=255, verbose_name="Test")),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        to="blog.post",
+                        verbose_name="Post",
+                    ),
+                ),
+                (
+                    "reply_to",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        to="blog.postcomment",
+                        verbose_name="Reply to",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Post Comment',
-                'verbose_name_plural': 'Post Comments',
+                "verbose_name": "Post Comment",
+                "verbose_name_plural": "Post Comments",
             },
         ),
     ]

@@ -1,8 +1,39 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Agents | BezmaklerDom{% endblock title %}
+{% block title %}Agents | Loysuvoq{% endblock title %}
 
 {% block content %}
+
+<!--/ Intro Single star /-->
+<section class="intro-single">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <div class="title-single-box">
+          <h1 class="title-single">Margaret Stone</h1>
+          <span class="color-text-a">Agent Immobiliari</span>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="#">Agents</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Margaret Stone
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Intro Single End /-->
+
 <!--/ Agents Grid Star /-->
 <section class="agents-grid grid">
   <div class="container">
@@ -16,7 +47,7 @@
             <div class="card-header-d">
               <div class="card-title-d align-self-center">
                 <h3 class="title-d">
-                  <a href="#" class="link-two">Margaret Sotillo
+                  <a href="{{ agent.get_absolute_url}}" class="link-two">{{agent.name}}
                     <br> Escala</a>
                 </h3>
               </div>
@@ -27,36 +58,36 @@
               </p>
               <div class="info-agents color-a">
                 <p>
-                  <strong>Phone: </strong> +54 356 945234</p>
+                  <strong>Phone: </strong> {{agent.phone}}</p>
                 <p>
-                  <strong>Email: </strong> agents@example.com</p>
+                  <strong>Email: </strong> {{agent.email}}</p>
               </div>
             </div>
             <div class="card-footer-d">
               <div class="socials-footer d-flex justify-content-center">
                 <ul class="list-inline">
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="{{ agent.facebook}}" class="link-one">
                       <i class="fa fa-facebook" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="{{agent.twitter}}" class="link-one">
                       <i class="fa fa-twitter" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="{{agent.instagram}}" class="link-one">
                       <i class="fa fa-instagram" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
-                      <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                    <a href="{{agent.telegram}}" class="link-one">
+                      <i class="fa fa-telegram" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="#" class="link-one">
+                    <a href="{{agent.x}}" class="link-one">
                       <i class="fa fa-dribbble" aria-hidden="true"></i>
                     </a>
                   </li>

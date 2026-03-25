@@ -1,38 +1,35 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
+
+from apps.estate.models import Estate, EstateAgent, EstateAgentComment
+from apps.blog.models import Post
+from apps.estate.forms import EstateAgentCommentForm
 
 
-from apps.estate.models import Estate, EstateAgent
-# from apps.blog.models import Post
-
-
-# Create your views here.
 def home(request):
     estates = (
         Estate.objects.prefetch_related("images")
-        # .filter(is_active=True)
-        .all()
+        .filter(is_featured=True)
         .order_by("-price")[:3]
     )
     properties = (
         Estate.objects.prefetch_related("images").all().order_by("-created_at")[:4]
     )
-    agents = (
-        EstateAgent.objects.prefetch_related("images").all().order_by("-rating")[:4]
-    )
-    # posts = Post.objects.select_related("image").order_by("-created_at")[:4]
+    agents = EstateAgent.objects.select_related("avatar").order_by("-rating")[:3]
+    posts = Post.objects.select_related("image").order_by("-created_at")[:4]
+
     context = {
         "estates": estates,
         "properties": properties,
         "agents": agents,
-        # "posts": posts,
+        "posts": posts,
     }
-
     return render(request, "estate/index.html", context=context)
 
 
 def about(request):
-    return render(request, "about.html")
+    agents = EstateAgent.objects.select_related("avatar").order_by("-rating")[:3]
+    return render(request, "about.html", context={"agents": agents})
 
 
 class PropertyView(TemplateView):
@@ -40,23 +37,38 @@ class PropertyView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["estates"] = Estate.objects.prefetch_related("images").all()
+        limit, offset = (
+            self.request.GET.get("limit", 3),
+            self.request.GET.get("offset", 0),
+        )
+        pages_count = Estate.objects.count() // int(limit) + 1
+        context["estates"] = Estate.objects.prefetch_related("images").order_by(
+            "-created_at"
+        )[int(offset) : int(offset) + int(limit)]
+        context["limit"] = limit
+        context["offset"] = offset
+        context["pages_count"] = [i + 1 for i in range(pages_count)]
         return context
 
 
 class PropertySingleView(TemplateView):
     template_name = "estate/property-single.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["estate"] = Estate.objects.prefetch_related("images").get(
+            slug=self.kwargs["slug"]
+        )
+        context["form"] = EstateAgentCommentForm()
+        return context
 
-class BlogSingleView(TemplateView):
-    template_name = "blog-single.html"
+
+class EstateAgentCommentHandlerView(CreateView):
+    model = EstateAgentComment
+    form_class = EstateAgentCommentForm
 
 
-class BlogListView(TemplateView):
-    template_name = "blog-single.html"
-
-
-class AgentsListView(TemplateView):
+class AgentListView(TemplateView):
     template_name = "agents-grid.html"
 
 

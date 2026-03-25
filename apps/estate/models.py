@@ -1,16 +1,17 @@
-from apps.model import BaseModel
 from django.db import models
+from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from apps.estate.choices import EstateStatusChoices
+from apps.model import BaseModel
 
 
 class EstateAgent(BaseModel):
     first_name = models.CharField(max_length=255, verbose_name="First name")
     last_name = models.CharField(max_length=255, verbose_name="Last name")
     bio = models.TextField(verbose_name="Bio", blank=True, null=True)
-    images = models.ForeignKey(
+    avatar = models.ForeignKey(
         "common.Media",
-        verbose_name="Images",
+        verbose_name="Avatar",
         on_delete=models.RESTRICT,
         blank=True,
         null=True,
@@ -50,6 +51,7 @@ class EstateAgent(BaseModel):
 
 class Estate(BaseModel):
     name = models.CharField(max_length=255, verbose_name="Estate name")
+    slug = models.SlugField(max_length=255, verbose_name="Slug", blank=True, null=True)
     agent = models.ForeignKey(
         "estate.EstateAgent",
         on_delete=models.RESTRICT,
@@ -136,6 +138,15 @@ class EstateAgentComment(BaseModel):
     name = models.CharField(max_length=255, verbose_name="Name")
     email = models.EmailField(verbose_name="Email")
     comment = models.TextField(verbose_name="Comment")
+    stars_count = models.IntegerField(
+        verbose_name="Stars Count",
+        validators=[MaxValueValidator(5), MinValueValidator(0)],
+        blank=True,
+        null=True,
+    )
+
+    def get_absolute_url(self):
+        return reverse("properties")
 
     class Meta:
         verbose_name = "Estate agent comment"

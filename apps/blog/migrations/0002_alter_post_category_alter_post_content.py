@@ -6,20 +6,27 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0001_initial'),
+        ("blog", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='category',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.RESTRICT, to='blog.postcategory', verbose_name='Category'),
+            model_name="post",
+            name="category",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.RESTRICT,
+                to="blog.postcategory",
+                verbose_name="Category",
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='content',
-            field=ckeditor.fields.RichTextField(blank=True, null=True, verbose_name='Content'),
+            model_name="post",
+            name="content",
+            field=ckeditor.fields.RichTextField(
+                blank=True, null=True, verbose_name="Content"
+            ),
         ),
     ]

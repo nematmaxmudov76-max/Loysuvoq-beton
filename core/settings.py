@@ -29,6 +29,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
 ]
 
 LOCAL_APPS = [
@@ -38,11 +39,13 @@ LOCAL_APPS = [
 ]
 
 EXTERNAL_APPS = [
+    "drf_spectacular",
+    "rest_framework",
     "jazzmin",
-    "ckeditor", 
-    ]
+    "ckeditor",
+]
 
-INSTALLED_APPS = EXTERNAL_APPS +  LOCAL_APPS + DJANGO_APPS 
+INSTALLED_APPS = EXTERNAL_APPS + LOCAL_APPS + DJANGO_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -55,6 +58,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "core.urls"
+
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Your Project API",
+    "DESCRIPTION": "Your project description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
+}
 
 TEMPLATES = [
     {
@@ -141,7 +157,6 @@ MEDIA_ROOT = (
 )  # media fayllar yig'iladigan joy (upload qilinadigan fayllar shu joyga yig'iladi)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 
 
 JAZZMIN_SETTINGS = {
