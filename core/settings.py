@@ -158,6 +158,8 @@ MEDIA_ROOT = (
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+SILENCED_SYSTEM_CHECKS = ['ckeditor.W001']
+
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)

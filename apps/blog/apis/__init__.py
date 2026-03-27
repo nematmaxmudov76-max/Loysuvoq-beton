@@ -1,3 +1,15 @@
-from .views import BlogListView, BlogSingleView
+from .views import (
+    BlogPostCreateApiView,
+    BlogPostDeleteApiView,
+    BlogPostDetailAPIView,
+    BlogPostListAPIView,
+    BlogPostUpdateApiView,
+)
 
-__all__ = ["BlogListView", "BlogSingleView"]
+__all__ = [
+    "BlogPostCreateApiView",
+    "BlogPostDeleteApiView",
+    "BlogPostDetailAPIView",
+    "BlogPostListAPIView",
+    "BlogPostUpdateApiView",
+]

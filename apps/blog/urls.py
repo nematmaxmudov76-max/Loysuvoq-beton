@@ -8,4 +8,4 @@ urlpatterns = [
     path("posts/<slug:slug>/", BlogSingleView.as_view(), name="blog-single"),
     path("api/posts/", BlogPostListAPIView.as_view(), name="api-blogs"),
     path("api/posts/<int:pk>/", BlogPostDetailAPIView.as_view(), name="api-blog-single"),
-]
+] # bu yerda "name" ni vazifasi o'sha nom ostida xotiradga hashtable ga saqlashda yordam beradi

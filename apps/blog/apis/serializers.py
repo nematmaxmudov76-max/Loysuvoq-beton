@@ -10,7 +10,9 @@ from apps.blog.models import Post
 #     created_at = serializers.DateTimeField(read_only=True)
 
 
-class BlogPostListSerializer(serializers.ModelSerializer):
+class BlogPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ["id", "title", "slug", "created_at"]
+        read_only_fields = ["id", "created_at"]
+
